@@ -122,6 +122,29 @@
     </div>
 
 </div>
+{% if history %}
+
+<div class="card mt-4 p-4">
+
+    <h3>
+        🕒 Recent QR History
+    </h3>
+
+    <ul class="list-group mt-3">
+
+        {% for item in history %}
+
+        <li class="list-group-item">
+            {{ item }}
+        </li>
+
+        {% endfor %}
+
+    </ul>
+
+</div>
+
+{% endif %}
 
 <footer class="text-center mt-5 mb-3 text-muted">
 

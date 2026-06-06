@@ -4,6 +4,8 @@ import os
 
 app = Flask(__name__)
 
+history = []
+
 @app.route("/", methods=["GET", "POST"])
 def home():
 
@@ -12,6 +14,8 @@ def home():
     if request.method == "POST":
 
         data = request.form["data"]
+
+        history.append(data)
 
         img = qrcode.make(data)
 
@@ -24,7 +28,8 @@ def home():
 
     return render_template(
         "index.html",
-        qr_image=qr_image
+        qr_image=qr_image,
+        history=history
     )
 
 if __name__ == "__main__":

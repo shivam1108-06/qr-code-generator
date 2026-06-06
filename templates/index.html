@@ -10,7 +10,8 @@
     <style>
 
         body{
-            background:#f4f6f9;
+            background:linear-gradient(to right,#eef2f3,#dfe9f3);
+            min-height:100vh;
         }
 
         .hero{
@@ -27,6 +28,11 @@
             border:none;
             border-radius:20px;
             box-shadow:0 0 20px rgba(0,0,0,0.1);
+            transition:0.3s;
+        }
+
+        .card:hover{
+            transform:translateY(-5px);
         }
 
         img{
@@ -34,10 +40,23 @@
             border-radius:15px;
             box-shadow:0 0 15px rgba(0,0,0,0.15);
         }
+
     </style>
 
 </head>
 <body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+
+    <div class="container">
+
+        <a class="navbar-brand fw-bold" href="/">
+            📱 QR Code Generator
+        </a>
+
+    </div>
+
+</nav>
 
 <div class="container">
 
@@ -53,53 +72,66 @@
 
     <div class="card p-4">
 
-       <form method="POST">
+        <form method="POST">
 
-    <input
-        type="text"
-        name="data"
-        class="form-control mb-3"
-        placeholder="Enter Text or URL"
-        required>
+            <input
+                type="text"
+                name="data"
+                class="form-control mb-3"
+                placeholder="Enter Text or URL"
+                required>
 
-    <button
-        type="submit"
-        class="btn btn-primary w-100">
+            <button
+                type="submit"
+                class="btn btn-primary w-100">
 
-        Generate QR Code
+                Generate QR Code
 
-    </button>
+            </button>
 
-</form>
+        </form>
+
+        {% if qr_image %}
+
+        <div class="text-center mt-4">
+
+            <h3>
+                Generated QR Code
+            </h3>
+
+            <img
+                src="{{ url_for('static', filename=qr_image) }}"
+                class="img-fluid mt-3"
+                alt="QR Code">
+
+            <br><br>
+
+            <a
+                href="{{ url_for('static', filename=qr_image) }}"
+                download
+                class="btn btn-success btn-lg">
+
+                ⬇ Download QR Code
+
+            </a>
+
+        </div>
+
+        {% endif %}
 
     </div>
-    {% if qr_image %}
-
-<div class="text-center mt-4">
-
-    <h3>
-        Generated QR Code
-    </h3>
-
-    <img
-        src="{{ url_for('static', filename=qr_image) }}"
-        class="img-fluid mt-3">
-
-         <br><br>
-
-    <a
-        href="{{ url_for('static', filename=qr_image) }}"
-        download
-        class="btn btn-success">
-
-        ⬇ Download QR Code
-
-    </a>
-</div>
-
-{% endif %}
 
 </div>
+
+<footer class="text-center mt-5 mb-3 text-muted">
+
+    <hr>
+
+    <p>
+        Created By Shivam Kotak 🚀
+    </p>
+
+</footer>
 
 </body>
 </html>

@@ -65,14 +65,22 @@
         <h1>📱 QR Code Generator</h1>
 
         <p>
-            Generate QR Codes for Text, URLs and More
+            Generate, View and Download QR Codes Instantly
         </p>
+
+    </div>
+
+    <div class="text-center mb-4">
+
+        <h5>📅 Current Date & Time</h5>
+
+        <p id="datetime"></p>
 
     </div>
 
     <div class="card p-4">
 
-        <form method="POST">
+        <form method="POST" onsubmit="showLoader()">
 
             <input
                 type="text"
@@ -90,6 +98,17 @@
             </button>
 
         </form>
+
+        <div id="loader" class="text-center mt-3" style="display:none;">
+
+            <div class="spinner-border text-primary" role="status">
+            </div>
+
+            <p class="mt-2">
+                Generating QR Code...
+            </p>
+
+        </div>
 
         {% if qr_image %}
 
@@ -121,30 +140,31 @@
 
     </div>
 
+    {% if history %}
+
+    <div class="card mt-4 p-4">
+
+        <h3 class="mb-3">
+            🕒 Recent QR History
+        </h3>
+
+        <ul class="list-group">
+
+            {% for item in history %}
+
+            <li class="list-group-item">
+                {{ item }}
+            </li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+    {% endif %}
+
 </div>
-{% if history %}
-
-<div class="card mt-4 p-4">
-
-    <h3>
-        🕒 Recent QR History
-    </h3>
-
-    <ul class="list-group mt-3">
-
-        {% for item in history %}
-
-        <li class="list-group-item">
-            {{ item }}
-        </li>
-
-        {% endfor %}
-
-    </ul>
-
-</div>
-
-{% endif %}
 
 <footer class="text-center mt-5 mb-3 text-muted">
 
@@ -155,6 +175,29 @@
     </p>
 
 </footer>
+
+<script>
+
+function showLoader(){
+
+    document.getElementById("loader").style.display = "block";
+
+}
+
+function updateDateTime(){
+
+    const now = new Date();
+
+    document.getElementById("datetime").innerHTML =
+        now.toLocaleString();
+
+}
+
+updateDateTime();
+
+setInterval(updateDateTime,1000);
+
+</script>
 
 </body>
 </html>

@@ -48,23 +48,41 @@
 
     <div class="card p-4">
 
-        <form>
+       <form method="POST">
 
-            <input
-                type="text"
-                class="form-control mb-3"
-                placeholder="Enter Text or URL">
+    <input
+        type="text"
+        name="data"
+        class="form-control mb-3"
+        placeholder="Enter Text or URL"
+        required>
 
-            <button
-                class="btn btn-primary w-100">
+    <button
+        type="submit"
+        class="btn btn-primary w-100">
 
-                Generate QR Code
+        Generate QR Code
 
-            </button>
+    </button>
 
-        </form>
+</form>
 
     </div>
+    {% if qr_image %}
+
+<div class="text-center mt-4">
+
+    <h3>
+        Generated QR Code
+    </h3>
+
+    <img
+        src="{{ url_for('static', filename=qr_image) }}"
+        class="img-fluid mt-3">
+
+</div>
+
+{% endif %}
 
 </div>
 
